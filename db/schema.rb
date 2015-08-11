@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150807141947) do
+ActiveRecord::Schema.define(:version => 20150810141249) do
 
   create_table "auth_tokens", :force => true do |t|
     t.string   "token"
@@ -881,6 +881,13 @@ ActiveRecord::Schema.define(:version => 20150807141947) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "search_settings", :force => true do |t|
+    t.integer  "community_id",                        :null => false
+    t.string   "main_search",  :default => "KEYWORD", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "sessions", :force => true do |t|
