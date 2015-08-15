@@ -65,7 +65,7 @@ gem 'rake'
 gem 'xpath'
 gem 'dynamic_form'
 gem "truncate_html"
-gem 'money-rails', '0.8.1'
+gem 'money-rails', '1.3.0'
 gem 'mercury-rails'
 gem 'fb-channel-file'
 gem 'country_select', '> 1.2.0'
