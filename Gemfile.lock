@@ -706,7 +706,7 @@ DEPENDENCIES
   memcachier
   mercury-rails
   meta_request
-  money-rails
+  money-rails (= 0.8.1)
   multi_json (~> 1.7.3)
   mysql2
   newrelic_rpm (~> 3.9.1.236)
