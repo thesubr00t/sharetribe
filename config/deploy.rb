@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:thesubr00t/sharetribe.git'
 
 set :deploy_to, '/home/deploy/eurobizz'
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/config.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :delayed_job_server_role, :worker
