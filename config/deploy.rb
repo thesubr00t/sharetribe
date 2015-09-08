@@ -1,13 +1,13 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'eurobizz'
+set :application, 'sharetribe'
 set :repo_url, 'git@github.com:thesubr00t/sharetribe.git'
 set :branch, :francisca
 
-set :deploy_to, '/home/deploy/eurobizz'
+set :deploy_to, '/home/deploy/sharetribe'
 
-set :linked_files, %w{config/database.yml config/config.yml config/application.yml}
+set :linked_files, %w{config/database.yml config/config.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :delayed_job_server_role, :worker
