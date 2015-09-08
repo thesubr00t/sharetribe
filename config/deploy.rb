@@ -3,6 +3,7 @@ lock '3.4.0'
 
 set :application, 'sharetribe'
 set :repo_url, 'git@github.com:thesubr00t/sharetribe.git'
+set :branch, :francisca
 
 set :deploy_to, '/home/deploy/sharetribe'
 
