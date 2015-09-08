@@ -23,7 +23,6 @@ require 'capistrano/rails/migrations'
 require 'capistrano/rails'
 # require 'capistrano/console'
 # require 'capistrano/rails/console'
-require 'capistrano/puma'
 
 # If you are using rvm add these lines:
 require 'capistrano/rvm'

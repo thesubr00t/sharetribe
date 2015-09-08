@@ -24,8 +24,7 @@ gem 'jquery-rails', '2.1.4'
 
 # gem 'heroku' install the Heroku toolbelt (https://toolbelt.heroku.com/) instead (as gem had some problems)
 #gem 'thin'
-# gem 'unicorn', "~>4.6.3"
-gem 'puma'
+gem 'unicorn', "~>4.6.3"
 gem "rack-timeout"
 
 gem "mysql2"
@@ -122,7 +121,6 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm', github: "capistrano/rvm"
-  gem 'capistrano3-puma'
 end
 
 group :test do
