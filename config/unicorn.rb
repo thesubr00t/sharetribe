@@ -2,6 +2,15 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 2)
 timeout 25 # seconds, keep this lower than 30 if deployed to heroku
 preload_app true
 
+# Set the current app's path for later reference. Rails.root isn't available at
+# this point, so we have to point up a directory.
+app_path = File.expand_path(File.dirname(__FILE__) + '/..')
+
+# You should define your stderr and stdout here. If you don't, stderr defaults
+# to /dev/null and you'll lose any error logging when in daemon mode.
+stderr_path app_path + '/log/unicorn.log'
+stdout_path app_path + '/log/unicorn.log'
+
 before_fork do |server, worker|
 
   Signal.trap 'TERM' do
