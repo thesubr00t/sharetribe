@@ -29,6 +29,8 @@ require 'capistrano/rvm'
 set :rvm_type, :user
 set :rvm_ruby_version, '2.1.2'
 
+require 'capistrano/delayed-job'
+
 require 'thinking_sphinx/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.

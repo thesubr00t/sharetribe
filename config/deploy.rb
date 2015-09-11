@@ -9,8 +9,7 @@ set :deploy_to, '/home/deploy/eurobizz'
 set :linked_files, %w{config/database.yml config/config.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-set :delayed_job_server_role, :worker
-set :delayed_job_args, "-n 2"
+set :delayed_job_bin_path, 'script' # for rails 3.x
 
 namespace :deploy do
 
@@ -18,16 +17,15 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'delayed_job:restart'
     end
   end
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
-end
 
-after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
-  task :restart do
+  after 'deploy:published', 'restart' do
     invoke 'delayed_job:restart'
   end
 end
+
