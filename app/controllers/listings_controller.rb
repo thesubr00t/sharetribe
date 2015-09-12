@@ -681,42 +681,37 @@ class ListingsController < ApplicationController
     end
   end
 
-  # def payment_setup_status(community:, user:, listing:, payment_type:, process:)
-  #   case [payment_type, process]
-  #   when matches([nil]),
-  #        matches([__, :none])
-  #     [true, ""]
-  #   when matches([:braintree])
-  #     can_post = !PaymentRegistrationGuard.new(community, user, listing).requires_registration_before_posting?
-  #     settings_link = payment_settings_path(community.payment_gateway.gateway_type, user)
-  #     error_msg = t("listings.new.you_need_to_fill_payout_details_before_accepting", :payment_settings_link => view_context.link_to(t("listings.new.payment_settings_link"), settings_link)).html_safe
-
-  #     [can_post, error_msg]
-  #   when matches([:paypal])
-  #     can_post = PaypalHelper.community_ready_for_payments?(community.id)
-  #     error_msg =
-  #       if user.has_admin_rights_in?(community)
-  #         t("listings.new.community_not_configured_for_payments_admin",
-  #           payment_settings_link: view_context.link_to(
-  #             t("listings.new.payment_settings_link"),
-  #             admin_community_paypal_preferences_path(community_id: community.id)))
-  #           .html_safe
-  #       else
-  #         t("listings.new.community_not_configured_for_payments",
-  #           contact_admin_link: view_context.link_to(
-  #             t("listings.new.contact_admin_link_text"),
-  #             new_user_feedback_path))
-  #           .html_safe
-  #       end
-  #     [can_post, error_msg]
-  #   else
-  #     [true, ""]
-  #   end
-  # end
-
-  # Bypass PaymentRegistrationGuard. TEMP FIX!!!!
   def payment_setup_status(community:, user:, listing:, payment_type:, process:)
+    case [payment_type, process]
+    when matches([nil]),
+         matches([__, :none])
       [true, ""]
+    when matches([:braintree])
+      can_post = !PaymentRegistrationGuard.new(community, user, listing).requires_registration_before_posting?
+      settings_link = payment_settings_path(community.payment_gateway.gateway_type, user)
+      error_msg = t("listings.new.you_need_to_fill_payout_details_before_accepting", :payment_settings_link => view_context.link_to(t("listings.new.payment_settings_link"), settings_link)).html_safe
+
+      [can_post, error_msg]
+    when matches([:paypal])
+      can_post = PaypalHelper.community_ready_for_payments?(community.id)
+      error_msg =
+        if user.has_admin_rights_in?(community)
+          t("listings.new.community_not_configured_for_payments_admin",
+            payment_settings_link: view_context.link_to(
+              t("listings.new.payment_settings_link"),
+              admin_community_paypal_preferences_path(community_id: community.id)))
+            .html_safe
+        else
+          t("listings.new.community_not_configured_for_payments",
+            contact_admin_link: view_context.link_to(
+              t("listings.new.contact_admin_link_text"),
+              new_user_feedback_path))
+            .html_safe
+        end
+      [can_post, error_msg]
+    else
+      [true, ""]
+    end
   end
 
   def delivery_config(require_shipping_address, pickup_enabled, shipping_price, shipping_price_additional, currency)
